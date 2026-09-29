@@ -2,7 +2,7 @@
 
 Personal portfolio of Zeyad Khalid, a cybersecurity graduate focused on SOC operations, incident response and blue teaming.
 
-**Live site:** https://Zeyad Khalid.github.io
+**Live site:** https://zyad889.github.io
 
 ## What's inside
 
