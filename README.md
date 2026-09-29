@@ -1,8 +1,8 @@
-# Zyad Khalid | Portfolio
+# Zeyad Khalid | Portfolio
 
-Personal portfolio of Zyad Khalid, a cybersecurity graduate focused on SOC operations, incident response and blue teaming.
+Personal portfolio of Zeyad Khalid, a cybersecurity graduate focused on SOC operations, incident response and blue teaming.
 
-**Live site:** https://YOUR-USERNAME.github.io
+**Live site:** https://Zeyad Khalid.github.io
 
 ## What's inside
 
