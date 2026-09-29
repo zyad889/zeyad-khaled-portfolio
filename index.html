@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Zyad Khalid | SOC Analyst & Incident Response</title>
+<meta name="description" content="Zyad Khalid, cybersecurity graduate focused on SOC operations, incident response and blue teaming. Open to SOC Analyst L1 roles and Incident Response internships.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🛡️</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,700;12..96,800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #edf1f4;
+    --surface: #f8fafb;
+    --ink: #141e28;
+    --muted: #566574;
+    --line: #c9d3db;
+    --accent: #1b4fd8;
+    --alert: #c76f00;
+    --panel: #101a24;
+    --panel-line: #24323f;
+    --panel-ink: #dce6ee;
+    --panel-muted: #8ea1b1;
+    --font: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --mono: "IBM Plex Mono", ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0d141b;
+      --surface: #131d27;
+      --ink: #e6edf3;
+      --muted: #94a5b4;
+      --line: #263543;
+      --accent: #6d9bff;
+      --alert: #f0a030;
+      --panel: #0a1118;
+      --panel-line: #223140;
+    }
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 4.5rem; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); text-underline-offset: 3px; }
+  a:hover { text-decoration-thickness: 2px; }
+  :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 0 1.5rem; }
+
+  /* Nav */
+  header.nav {
+    position: sticky; top: 0; z-index: 10;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav .wrap { display: flex; align-items: center; justify-content: space-between; height: 3.5rem; }
+  .nav .brand { font-weight: 800; color: var(--ink); text-decoration: none; letter-spacing: -0.01em; }
+  .nav ul { display: flex; gap: 1.25rem; list-style: none; margin: 0; padding: 0; font-size: 0.95rem; }
+  .nav ul a { color: var(--muted); text-decoration: none; }
+  .nav ul a:hover { color: var(--ink); }
+
+  /* Hero */
+  .hero { padding: 4.5rem 0 4rem; }
+  .hero .wrap { display: grid; grid-template-columns: 1fr 1.05fr; gap: 3.5rem; align-items: center; }
+  .status {
+    display: inline-flex; align-items: center; gap: 0.6rem;
+    font-size: 0.95rem; color: var(--muted);
+    border: 1px solid var(--line); background: var(--surface);
+    padding: 0.35rem 0.9rem 0.35rem 0.75rem; border-radius: 999px; margin: 0 0 1.5rem;
+  }
+  .dot { width: 0.6rem; height: 0.6rem; border-radius: 50%; background: var(--alert); flex: none; }
+  h1 {
+    font-size: clamp(2.8rem, 6.5vw, 4.75rem);
+    line-height: 1;
+    letter-spacing: -0.035em;
+    font-weight: 800;
+    margin: 0 0 1.1rem;
+  }
+  .role { font-size: 1.35rem; font-weight: 500; line-height: 1.35; margin: 0 0 1.1rem; max-width: 26ch; }
+  .lead { color: var(--muted); max-width: 46ch; margin: 0 0 2rem; }
+  .actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .btn {
+    display: inline-block; padding: 0.7rem 1.25rem; border-radius: 8px;
+    font-weight: 700; text-decoration: none; border: 2px solid var(--ink);
+  }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .btn.primary:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+  .btn.ghost { color: var(--ink); }
+  .btn.ghost:hover { background: var(--surface); }
+
+  /* Console (the memorable element) */
+  .console {
+    background: var(--panel); color: var(--panel-ink);
+    border-radius: 12px; overflow: hidden;
+    border: 1px solid var(--panel-line);
+    box-shadow: 0 24px 48px -28px rgba(10, 20, 30, 0.55);
+  }
+  .console-head { padding: 1rem 1.25rem; border-bottom: 1px solid var(--panel-line); }
+  .console-head h2 { margin: 0; font-size: 1.05rem; font-weight: 700; }
+  .console-head p { margin: 0.2rem 0 0; font-size: 0.85rem; color: var(--panel-muted); }
+  .events { list-style: none; margin: 0; padding: 0; }
+  .events li { border-bottom: 1px solid var(--panel-line); }
+  .events li:last-child { border-bottom: 0; }
+  .ev-btn {
+    all: unset; box-sizing: border-box; cursor: pointer; width: 100%;
+    display: grid; grid-template-columns: 4.25rem 1fr auto; gap: 0.75rem; align-items: baseline;
+    padding: 0.85rem 1.25rem;
+  }
+  .ev-btn:hover, .ev-btn[aria-expanded="true"] { background: #17232f; }
+  .ev-btn:focus-visible { outline: 2px solid #9db8ff; outline-offset: -2px; border-radius: 0; }
+  .ev-time { font-family: var(--mono); font-size: 0.8rem; color: var(--panel-muted); }
+  .ev-name { font-weight: 500; }
+  .ev-id {
+    font-family: var(--mono); font-size: 0.75rem; color: #f0a030;
+    border: 1px solid #5a3d10; padding: 0.1rem 0.45rem; border-radius: 4px;
+  }
+  .ev-detail { padding: 0 1.25rem 1.1rem 6.25rem; font-size: 0.93rem; color: #b9c8d4; }
+  .ev-detail[hidden] { display: none; }
+  .ev-detail code { font-family: var(--mono); font-size: 0.82rem; color: #dce6ee; background: #1c2a37; padding: 0.05rem 0.35rem; border-radius: 3px; }
+  .ev-detail strong { color: var(--panel-ink); font-weight: 700; }
+
+  @keyframes rowIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  .events li { animation: rowIn 0.45s ease both; }
+  .events li:nth-child(1) { animation-delay: 0.15s; }
+  .events li:nth-child(2) { animation-delay: 0.30s; }
+  .events li:nth-child(3) { animation-delay: 0.45s; }
+  .events li:nth-child(4) { animation-delay: 0.60s; }
+  .events li:nth-child(5) { animation-delay: 0.75s; }
+  .events li:nth-child(6) { animation-delay: 0.90s; }
+
+  /* Sections: label rail on the left */
+  .sec { border-top: 1px solid var(--line); padding: 3.5rem 0; }
+  .sec .wrap { display: grid; grid-template-columns: 200px 1fr; gap: 2.5rem; }
+  .sec > .wrap > h2 {
+    margin: 0; font-size: 1.15rem; font-weight: 700; letter-spacing: -0.01em;
+    position: sticky; top: 5rem; align-self: start;
+  }
+  .prose { max-width: 62ch; }
+  .prose p { margin: 0 0 1rem; }
+  .focus { color: var(--muted); font-size: 0.98rem; }
+  .focus strong { color: var(--ink); }
+
+  /* Skills */
+  .skills { margin: 0; }
+  .skills > div { display: grid; grid-template-columns: 11rem 1fr; gap: 1.5rem; padding: 1rem 0; border-bottom: 1px solid var(--line); }
+  .skills > div:first-child { padding-top: 0; }
+  .skills > div:last-child { border-bottom: 0; }
+  .skills dt { font-weight: 700; }
+  .skills dd { margin: 0; color: var(--muted); }
+
+  /* Project */
+  .project h3 { font-size: clamp(2rem, 4vw, 2.75rem); letter-spacing: -0.03em; line-height: 1.05; margin: 0 0 0.35rem; font-weight: 800; }
+  .project .sub { color: var(--muted); margin: 0 0 1.5rem; }
+  .project h4 { font-size: 1rem; margin: 2rem 0 0.6rem; font-weight: 700; }
+  .project p { max-width: 62ch; margin: 0 0 0.75rem; }
+  .features { columns: 2; column-gap: 2rem; padding-left: 1.1rem; margin: 0; max-width: 62ch; }
+  .features li { margin-bottom: 0.4rem; break-inside: avoid; }
+  .roles { display: grid; gap: 1rem; max-width: 62ch; }
+  .roles p { margin: 0; padding-left: 1rem; border-left: 3px solid var(--accent); }
+  .applied { color: var(--muted); font-size: 0.98rem; }
+
+  /* Training & education */
+  .entry { margin-bottom: 2rem; max-width: 62ch; }
+  .entry:last-child { margin-bottom: 0; }
+  .entry h3 { margin: 0; font-size: 1.2rem; font-weight: 700; }
+  .entry .meta { margin: 0.1rem 0 0.6rem; color: var(--muted); }
+  .entry ul { margin: 0; padding-left: 1.1rem; }
+  .entry li { margin-bottom: 0.25rem; }
+
+  /* Contact */
+  .contact-line { font-size: 1.5rem; font-weight: 500; line-height: 1.3; margin: 0 0 1.5rem; max-width: 30ch; }
+  .links { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .links li { display: grid; grid-template-columns: 6rem 1fr; }
+  .links span { color: var(--muted); }
+
+  footer { border-top: 1px solid var(--line); padding: 1.5rem 0 2.5rem; color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 860px) {
+    .hero { padding-top: 3rem; }
+    .hero .wrap { grid-template-columns: 1fr; gap: 2.5rem; }
+    .sec .wrap { grid-template-columns: 1fr; gap: 1.25rem; }
+    .sec > .wrap > h2 { position: static; }
+    .skills > div { grid-template-columns: 1fr; gap: 0.25rem; }
+    .features { columns: 1; }
+    .nav ul { gap: 0.9rem; font-size: 0.88rem; }
+    .ev-btn { grid-template-columns: 3.75rem 1fr; }
+    .ev-id { grid-column: 2; justify-self: start; }
+    .ev-detail { padding-left: 1.25rem; }
+  }
+  @media (max-width: 480px) {
+    .nav ul li:nth-child(n+4) { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .events li { animation: none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="wrap">
+    <a class="brand" href="#top">Zyad Khalid</a>
+    <nav aria-label="Main">
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#project">Project</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero">
+    <div class="wrap">
+      <div>
+        <p class="status"><span class="dot" aria-hidden="true"></span>Open to SOC Analyst L1 roles and IR internships</p>
+        <h1>Zyad Khalid</h1>
+        <p class="role">Cybersecurity graduate focused on detection and incident response.</p>
+        <p class="lead">I train by investigating simulated attacks in the logs: what ran, what changed, and what to do next. The panel on the right shows how I read one.</p>
+        <div class="actions">
+          <a class="btn primary" href="#project">See my project</a>
+          <a class="btn ghost" href="#contact">Get in touch</a>
+        </div>
+      </div>
+
+      <div class="console">
+        <div class="console-head">
+          <h2>Reading an intrusion, step by step</h2>
+          <p>Illustrative phishing-to-ransomware walkthrough. Select a step.</p>
+        </div>
+        <ol class="events" id="events">
+          <li>
+            <button class="ev-btn" aria-expanded="true" aria-controls="d1" id="b1">
+              <span class="ev-time">+00 min</span><span class="ev-name">Malicious attachment opened</span><span class="ev-id">T1566.001</span>
+            </button>
+            <div class="ev-detail" id="d1" role="region" aria-labelledby="b1">
+              <strong>Look for:</strong> an Office process starting a shell, such as <code>WINWORD.EXE</code> spawning <code>cmd.exe</code> or <code>powershell.exe</code> (Sysmon Event ID 1), plus the matching email gateway record.
+            </div>
+          </li>
+          <li>
+            <button class="ev-btn" aria-expanded="false" aria-controls="d2" id="b2">
+              <span class="ev-time">+02 min</span><span class="ev-name">Encoded PowerShell runs</span><span class="ev-id">T1059.001</span>
+            </button>
+            <div class="ev-detail" id="d2" role="region" aria-labelledby="b2" hidden>
+              <strong>Look for:</strong> long Base64 command lines and hidden windows. Script block logging (Event ID 4104) shows the decoded content.
+            </div>
+          </li>
+          <li>
+            <button class="ev-btn" aria-expanded="false" aria-controls="d3" id="b3">
+              <span class="ev-time">+05 min</span><span class="ev-name">Persistence added</span><span class="ev-id">T1547.001</span>
+            </button>
+            <div class="ev-detail" id="d3" role="region" aria-labelledby="b3" hidden>
+              <strong>Look for:</strong> new values under the registry <code>Run</code> keys (Sysmon Event ID 13) pointing to a file in a user-writable folder.
+            </div>
+          </li>
+          <li>
+            <button class="ev-btn" aria-expanded="false" aria-controls="d4" id="b4">
+              <span class="ev-time">+18 min</span><span class="ev-name">Credentials dumped</span><span class="ev-id">T1003.001</span>
+            </button>
+            <div class="ev-detail" id="d4" role="region" aria-labelledby="b4" hidden>
+              <strong>Look for:</strong> an unexpected process opening <code>lsass.exe</code> with read access (Sysmon Event ID 10).
+            </div>
+          </li>
+          <li>
+            <button class="ev-btn" aria-expanded="false" aria-controls="d5" id="b5">
+              <span class="ev-time">+40 min</span><span class="ev-name">Movement to a file server</span><span class="ev-id">T1021.002</span>
+            </button>
+            <div class="ev-detail" id="d5" role="region" aria-labelledby="b5" hidden>
+              <strong>Look for:</strong> a network logon (Event ID 4624, type 3) from a workstation that never connects to that server, followed by admin share access (Event ID 5140).
+            </div>
+          </li>
+          <li>
+            <button class="ev-btn" aria-expanded="false" aria-controls="d6" id="b6">
+              <span class="ev-time">+55 min</span><span class="ev-name">Files encrypted</span><span class="ev-id">T1486</span>
+            </button>
+            <div class="ev-detail" id="d6" role="region" aria-labelledby="b6" hidden>
+              <strong>Look for:</strong> a burst of file renames and writes, and shadow copy deletion. Response: isolate the host, preserve evidence, then scope the spread.
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="about">
+    <div class="wrap">
+      <h2>About</h2>
+      <div class="prose">
+        <p>I graduated from the Faculty of Computers and Artificial Intelligence (Cybersecurity track) at Beni-Suef National University. My focus is defensive security: watching systems, spotting attacks early, and responding to them.</p>
+        <p>I build my skills through hands-on labs, security tools and simulated attacks, and my goal is to start as a SOC Analyst L1 and grow into L2 and Incident Response work.</p>
+        <p class="focus"><strong>Focus areas:</strong> SOC operations, incident response, threat detection, digital forensics, SIEM and log analysis.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <dl class="skills">
+        <div><dt>Defensive security</dt><dd>SOC operations, incident response, threat detection, digital forensics fundamentals, blue teaming, log analysis</dd></div>
+        <div><dt>Networking and systems</dt><dd>Network security, computer networks, Linux fundamentals, Windows security, SIEM fundamentals (Splunk, ELK and Wazuh concepts)</dd></div>
+        <div><dt>Tools and techniques</dt><dd>Wireshark, Sysmon, Windows Event Logs, MITRE ATT&amp;CK, basic malware analysis, Postman and API testing</dd></div>
+        <div><dt>Offensive awareness</dt><dd>Ethical hacking fundamentals, vulnerability assessment, web security basics</dd></div>
+        <div><dt>Working style</dt><dd>Team leadership, problem solving, documentation, communication, teamwork</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <section class="sec project" id="project">
+    <div class="wrap">
+      <h2>Featured project</h2>
+      <div>
+        <h3>CyberArab</h3>
+        <p class="sub">Arabic cybersecurity training platform · Graduation project</p>
+        <p>An Arabic-language platform inspired by TryHackMe and Hack The Box. It helps Arabic-speaking learners build practical security skills through interactive labs, CTF challenges and SOC-style simulations.</p>
+
+        <h4>What it includes</h4>
+        <ul class="features">
+          <li>SOC simulation environment</li>
+          <li>CTF rooms and practical challenges</li>
+          <li>Threat intelligence module</li>
+          <li>Incident case management</li>
+          <li>Learning paths and progress tracking</li>
+          <li>Leaderboard and community forum</li>
+          <li>JWT authentication and admin panel</li>
+        </ul>
+
+        <h4>My role</h4>
+        <div class="roles">
+          <p><strong>Team leader.</strong> Managed the team, coordinated tasks and delivered the project on time.</p>
+          <p><strong>Security lead.</strong> Designed and built the JWT authentication system, applied secure coding practices, and worked on the SOC simulation and case management features.</p>
+        </div>
+
+        <h4>Skills applied</h4>
+        <p class="applied">SOC workflows, threat intelligence, incident case handling, web and API security, JWT authentication, project management.</p>
+
+        <!-- Add your links here once ready, for example:
+        <p><a href="https://github.com/YOUR-USERNAME/CyberArab">View the code on GitHub</a></p> -->
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="training">
+    <div class="wrap">
+      <h2>Training and education</h2>
+      <div>
+        <div class="entry">
+          <h3>Digital Egypt Pioneers Initiative (DEPI)</h3>
+          <p class="meta">Cyber Security Incident Response Analyst track</p>
+          <ul>
+            <li>SOC operations</li>
+            <li>Incident response lifecycle</li>
+            <li>Threat detection and analysis</li>
+            <li>Digital forensics fundamentals</li>
+            <li>Blue teaming techniques</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Additional courses</h3>
+          <p class="meta">Networking, Linux and security fundamentals</p>
+          <ul>
+            <li>Network+ fundamentals</li>
+            <li>Linux fundamentals</li>
+            <li>Ethical hacking</li>
+            <li>Penetration testing and vulnerability discovery</li>
+            <li>Computer networks and network defense</li>
+          </ul>
+        </div>
+        <div class="entry">
+          <h3>Beni-Suef National University</h3>
+          <p class="meta">B.Sc. in Computers and Artificial Intelligence, Cybersecurity</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sec" id="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <div>
+        <p class="contact-line">Hiring for a SOC Analyst L1 role or an Incident Response internship? Let's talk.</p>
+        <ul class="links">
+          <li><span>Email</span><a href="mailto:zyadkhalid13@gmail.com">zyadkhalid13@gmail.com</a></li>
+          <li><span>LinkedIn</span><a href="https://linkedin.com/in/zyad-khalid" rel="noopener">linkedin.com/in/zyad-khalid</a></li>
+          <!-- Add these when you have them:
+          <li><span>GitHub</span><a href="https://github.com/YOUR-USERNAME">github.com/YOUR-USERNAME</a></li>
+          <li><span>TryHackMe</span><a href="https://tryhackme.com/p/YOUR-USERNAME">tryhackme.com/p/YOUR-USERNAME</a></li> -->
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">© 2026 Zyad Khalid</div>
+</footer>
+
+<script>
+  (function () {
+    var buttons = document.querySelectorAll('.ev-btn');
+    buttons.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var open = btn.getAttribute('aria-expanded') === 'true';
+        buttons.forEach(function (b) {
+          b.setAttribute('aria-expanded', 'false');
+          document.getElementById(b.getAttribute('aria-controls')).hidden = true;
+        });
+        if (!open) {
+          btn.setAttribute('aria-expanded', 'true');
+          document.getElementById(btn.getAttribute('aria-controls')).hidden = false;
+        }
+      });
+    });
+  })();
+</script>
+</body>
+</html>
